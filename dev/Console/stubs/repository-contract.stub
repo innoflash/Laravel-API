@@ -2,8 +2,7 @@
 
 namespace App\{{module}}\Contracts\Repositories;
 
-use App\Ministry\Models\{{model}};
-use Core\Abstracts\Repositories\BaseRepositoryInterface;
+use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
  * Interface {{class}}

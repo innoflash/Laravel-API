@@ -2,7 +2,8 @@
 
 namespace App\{{module}}\Repositories;
 
-use Core\Abstracts\Repositories\Repository;
+use Prettus\Repository\Eloquent\BaseRepository;
+use Prettus\Repository\Criteria\RequestCriteria;
 use App\{{module}}\Models\{{model}};
 use App\{{module}}\Contracts\Repositories\{{class}} as RepositoryInterface;
 
@@ -11,11 +12,21 @@ use App\{{module}}\Contracts\Repositories\{{class}} as RepositoryInterface;
  */
 class Default{{class}} extends Repository implements RepositoryInterface
 {
+    protected $fieldSearchable = [];
+
     /**
      * @return string
      */
     public function model(): string
     {
         return {{model}}::class;
+    }
+
+    /**
+     * Boot up the repository, pushing criteria
+     */
+    public function boot()
+    {
+        $this->pushCriteria(app(RequestCriteria::class));
     }
 }

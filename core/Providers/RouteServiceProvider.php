@@ -55,7 +55,7 @@ class RouteServiceProvider extends ServiceProvider
 
                     Route::name($kebabModuleName . '.')
                          ->prefix('api/' . $kebabModuleName)
-                         ->middleware(['api', 'auth:api', 'ministry-active'])
+                         ->middleware(['api', 'auth:api']) //TODO add a global middleware.
                          ->group($routeFile->getPathname());
                 }
             }

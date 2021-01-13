@@ -1,0 +1,36 @@
+<?php
+
+namespace App\{{module}}\Services;
+
+use App\{{module}}\Models\{{model}};
+use App\{{module}}\Contracts\Repositories\{{model}}Repository;
+use App\{{module}}\Contracts\Services\{{model}}QueryService as QueryServiceInterface;
+
+/**
+ * Class Default{{model}}QueryService
+ */
+class Default{{model}}QueryService implements QueryServiceInterface
+{
+    private {{model}}Repository ${{model_var}}Repository;
+
+    /**
+     * Default{{model}}Service constructor.
+     *
+     * @param {{model}}Repository ${{model_var}}Repository
+     */
+    public function __construct(
+       {{model}}Repository ${{model_var}}Repository
+    ) {
+        $this->{{model_var}}Repository = ${{model_var}}Repository;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return {{model}}
+     */
+    public function find(int $id): {{model}}
+    {
+        return $this->{{model_var}}Repository->find($id);
+    }
+}

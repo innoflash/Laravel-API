@@ -8,6 +8,7 @@ use Core\Validators\FacebookLinkValidator;
 use Core\Validators\InstagramLinkValidator;
 use Core\Validators\TwitterLinkValidator;
 use Core\Validators\YoutubeLinkValidator;
+use Dev\Providers\MainServiceProvider;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 
@@ -42,6 +43,7 @@ class CoreServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(AuthServiceProvider::class);
+        $this->app->register(MainServiceProvider::class); //register dev.
 
         $this->registerModulesMainProviders();
     }

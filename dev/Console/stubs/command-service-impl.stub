@@ -1,0 +1,56 @@
+<?php
+
+namespace App\{{module}}\Services;
+
+use App\{{module}}\Contracts\Repositories\{{model}}Repository;
+use App\{{module}}\Models\{{model}};
+use App\{{module}}\Contracts\Services\{{model}}CommandService as CommandServiceInterface;
+
+/**
+ * Class Default{{model}}CommandService
+ */
+class Default{{model}}CommandService implements CommandServiceInterface
+{
+    private {{model}}Repository ${{model_var}}Repository;
+
+    /**
+     * Default{{model}}CommandService constructor.
+     *
+     * @param {{model}}Repository ${{model_var}}Repository
+     */
+    public function __construct({{model}}Repository ${{model_var}}Repository)
+    {
+        $this->{{model_var}}Repository = ${{model_var}}Repository;
+    }
+
+    /**
+     * @param {{model}} ${{model_var}}
+     *
+     * @return {{model}}
+     */
+    public function create({{model}} ${{model_var}}): {{model}}
+    {
+        return $this->{{model_var}}Repository->saveModel(${{model_var}});
+    }
+
+    /**
+     * @param {{model}} ${{model_var}}
+     *
+     * @return {{model}}
+     */
+    public function update({{model}} ${{model_var}}): {{model}}
+    {
+        /** @var {{model}} ${{model_var}} */
+        return $this->{{model_var}}Repository->updateModel(${{model_var}}, ${{model_var}}->id);
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return void
+     */
+    public function delete(int $id): void
+    {
+        $this->{{model_var}}Repository->delete($id);
+    }
+}

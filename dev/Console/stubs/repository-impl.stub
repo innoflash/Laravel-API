@@ -1,0 +1,21 @@
+<?php
+
+namespace App\{{module}}\Repositories;
+
+use Core\Abstracts\Repositories\Repository;
+use App\{{module}}\Models\{{model}};
+use App\{{module}}\Contracts\Repositories\{{class}} as RepositoryInterface;
+
+/**
+ * Class Default{{class}}
+ */
+class Default{{class}} extends Repository implements RepositoryInterface
+{
+    /**
+     * @return string
+     */
+    public function model(): string
+    {
+        return {{model}}::class;
+    }
+}

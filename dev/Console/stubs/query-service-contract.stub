@@ -1,0 +1,18 @@
+<?php
+
+namespace App\{{module}}\Contracts\Services;
+
+use App\{{module}}\Models\{{model}};
+
+/**
+ * Interface {{model}}QueryService
+ */
+interface {{model}}QueryService
+{
+    /**
+     * @param int $id
+     *
+     * @return {{model}}
+     */
+    public function find(int $id): {{model}};
+}

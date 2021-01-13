@@ -2,10 +2,11 @@
 
 namespace Core\Criteria;
 
+use Core\Contracts\CriteriaContract;
 use Illuminate\Database\Eloquent\Builder;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
-class WithTrashedCriteria
+class WithTrashedCriteria implements CriteriaContract
 {
     /***
      * @param Builder             $model

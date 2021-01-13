@@ -2,11 +2,17 @@
 
 namespace Core\Exceptions;
 
+use Core\Concerns\ExceptionsTrait;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\PostTooLargeException;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use ExceptionsTrait;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -35,6 +41,18 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+        $this->renderable(function (Throwable $e, Request $request) {
+            if ($e instanceof PostTooLargeException) {
+                return response()->json([
+                    'exception'  => PostTooLargeException::class,
+                    'statusCode' => Response::HTTP_REQUEST_ENTITY_TOO_LARGE,
+                    'message'    => 'Post content too large',
+                ], $e->getStatusCode());
+            }
+            if ($request->route() && in_array('api', $request->route()->gatherMiddleware())) {
+                return $this->apiExceptions($request, $e);
+            }
         });
     }
 }

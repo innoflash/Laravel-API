@@ -10,7 +10,7 @@ use App\{{module}}\Contracts\Repositories\{{class}} as RepositoryInterface;
 /**
  * Class Default{{class}}
  */
-class Default{{class}} extends Repository implements RepositoryInterface
+class Default{{class}} extends BaseRepository implements RepositoryInterface
 {
     protected $fieldSearchable = [];
 

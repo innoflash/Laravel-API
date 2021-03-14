@@ -2,15 +2,21 @@
 
 namespace Core\Providers;
 
-use Core\Concerns\RegistersValidationRules;
 use Core\Loaders\ProvidersLoader;
-use Core\Validators\FacebookLinkValidator;
-use Core\Validators\InstagramLinkValidator;
+use Illuminate\Support\Facades\File;
+use Dev\Providers\MainServiceProvider;
+use Illuminate\Support\ServiceProvider;
 use Core\Validators\TwitterLinkValidator;
 use Core\Validators\YoutubeLinkValidator;
-use Dev\Providers\MainServiceProvider;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\ServiceProvider;
+use Core\Validators\FacebookLinkValidator;
+use Core\Services\DefaultUserQueryService;
+use Core\Concerns\RegistersValidationRules;
+use Core\Validators\InstagramLinkValidator;
+use Core\Repositories\DefaultUserRepository;
+use Core\Services\DefaultUserCommandService;
+use Core\Contracts\Services\UserQueryService;
+use Core\Contracts\Repositories\UserRepository;
+use Core\Contracts\Services\UserCommandService;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -60,6 +66,15 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerServices();
 
         $this->registerObservers();
+
+        $this->registerUserRepository();
+    }
+
+    private function registerUserRepository()
+    {
+        $this->app->bind(UserRepository::class, DefaultUserRepository::class);
+        $this->app->bind(UserQueryService::class, DefaultUserQueryService::class);
+        $this->app->bind(UserCommandService::class, DefaultUserCommandService::class);
     }
 
     /**

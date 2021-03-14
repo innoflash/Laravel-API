@@ -30,7 +30,7 @@ class Default{{model}}CommandService implements CommandServiceInterface
      */
     public function create({{model}} ${{model_var}}): {{model}}
     {
-        return $this->{{model_var}}Repository->saveModel(${{model_var}});
+        return $this->{{model_var}}Repository->create(${{model_var}}->toArray());
     }
 
     /**
@@ -41,7 +41,7 @@ class Default{{model}}CommandService implements CommandServiceInterface
     public function update({{model}} ${{model_var}}): {{model}}
     {
         /** @var {{model}} ${{model_var}} */
-        return $this->{{model_var}}Repository->updateModel(${{model_var}}, ${{model_var}}->id);
+        return $this->{{model_var}}Repository->update(${{model_var}}->toArray(), ${{model_var}}->id);
     }
 
     /**

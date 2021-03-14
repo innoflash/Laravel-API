@@ -30,7 +30,7 @@ class DefaultUserCommandService implements CommandServiceInterface
      */
     public function create(User $user): User
     {
-        return $this->userRepository->saveModel($user);
+        return $this->userRepository->create($user->toArray());
     }
 
     /**
@@ -41,7 +41,7 @@ class DefaultUserCommandService implements CommandServiceInterface
     public function update(User $user): User
     {
         /** @var User $user */
-        return $this->userRepository->updateModel($user, $user->id);
+        return $this->userRepository->update($user->toArray(), $user->id);
     }
 
     /**

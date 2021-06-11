@@ -2,6 +2,7 @@
 
 namespace Core\Providers;
 
+use Illuminate\Support\Str;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -71,5 +72,19 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
+    }
+
+    /**
+     * Converts a module to its kebab name.
+     *
+     * @param string $module
+     *
+     * @return string
+     */
+    private function getModuleKebab(string $module): string
+    {
+        return Str::of($module)
+                  ->afterLast('/')
+                  ->kebab();
     }
 }

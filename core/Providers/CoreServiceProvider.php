@@ -4,6 +4,7 @@ namespace Core\Providers;
 
 use Core\Loaders\ProvidersLoader;
 use Illuminate\Support\Facades\File;
+use Core\Validators\ZAPhoneValidator;
 use Dev\Providers\MainServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Core\Validators\TwitterLinkValidator;
@@ -31,6 +32,7 @@ class CoreServiceProvider extends ServiceProvider
         InstagramLinkValidator::class,
         TwitterLinkValidator::class,
         YoutubeLinkValidator::class,
+        ZAPhoneValidator::class
     ];
 
     /**

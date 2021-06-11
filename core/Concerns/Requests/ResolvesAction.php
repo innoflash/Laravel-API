@@ -14,7 +14,7 @@ trait ResolvesAction
     {
         return Str::of(class_basename($this))
                   ->beforeLast('Request')
-                  ->lower()
+                  ->kebab()
                   ->__toString();
     }
 }

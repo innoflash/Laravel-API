@@ -35,7 +35,7 @@ abstract class CoreRequest extends FormRequest
      */
     private function ministryId()
     {
-        return $this->ministry_id ?: auth('api')->id();
+        return $this->user_id ?: auth('api')->id();
     }
 
     /**

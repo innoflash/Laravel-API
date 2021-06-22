@@ -45,13 +45,6 @@ interface Mapper
     public function withId(int $id = null): Mapper;
 
     /**
-     * @param int|null $ministryId
-     *
-     * @return Mapper
-     */
-    public function withMinistryId(int $ministryId = null): Mapper;
-
-    /**
      * @param array $data
      *
      * @return Mapper

@@ -11,12 +11,12 @@ class UserCreateRequest extends CoreRequest
         return true;
     }
 
-
     function rules(): array
     {
         return [
-            'email'     => 'required|email|unique:users,email',
-            'password'  => 'required|string|min:6|confirmed',
+            'email'    => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6|confirmed',
+            'name'     => 'required|string'
         ];
     }
 }

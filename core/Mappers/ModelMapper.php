@@ -25,7 +25,6 @@ class ModelMapper implements Mapper
         if (isset($data['id'])) {
             $this->id = $data['id'];
         }
-        $this->ministryId     = $ministryId;
         $this->nullableFields = new Collection();
         $this->data           = $this->clearCollection($this->parseData($data));
         $this->dataArrays     = $this->data->filter(function ($value) {
@@ -308,22 +307,6 @@ class ModelMapper implements Mapper
         return $this;
     }
 
-    private function mergeMinistryIdWithData()
-    {
-        if ($this->ministryId) {
-            $this->data = $this->data->merge(['ministry_id' => $this->ministryId]);
-        }
-    }
-
-    private function mergeMinistryIdWithDataArrays(array $keys = ['*'])
-    {
-        if ($keys === ['*']) {
-            $this->includeInAllDataArrays(['ministry_id' => $this->ministryId]);
-        } else {
-            $this->includeInDataArrays($keys, ['ministry_id' => $this->ministryId]);
-        }
-    }
-
     /**
      * @param array $includeData
      */
@@ -464,23 +447,7 @@ class ModelMapper implements Mapper
     public function newFromSubset(string $key): Mapper
     {
         return new ModelMapper(
-            Arr::get($this->all()->toArray(), $key, []),
-            $this->ministryId
+            Arr::get($this->all()->toArray(), $key, [])
         );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function withMinistryId(int $ministryId = null): Mapper
-    {
-        if (!is_null($ministryId)) {
-            $this->ministryId = $ministryId;
-        }
-        $this->mergeMinistryIdWithData();
-
-        $this->mergeMinistryIdWithDataArrays();
-
-        return $this;
     }
 }

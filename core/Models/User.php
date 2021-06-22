@@ -71,8 +71,9 @@ class User extends Authenticatable implements JWTSubject
 
     public function getLoginUseOnceAttribute()
     {
-        return true;
+        return false;
     }
+
     public function getRedirectUrlAttribute(): string
     {
         return route('auth.reset-password');

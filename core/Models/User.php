@@ -10,11 +10,13 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Grosv\LaravelPasswordlessLogin\Traits\PasswordlessLogin;
 
 class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
     use HasRoles;
+    use PasswordlessLogin;
 
     /**
      * The attributes that are mass assignable.
@@ -65,6 +67,15 @@ class User extends Authenticatable implements JWTSubject
     protected static function newFactory()
     {
         return new UserFactory();
+    }
+
+    public function getLoginUseOnceAttribute()
+    {
+        return true;
+    }
+    public function getRedirectUrlAttribute(): string
+    {
+        return route('auth.reset-password');
     }
 
     protected static function boot()

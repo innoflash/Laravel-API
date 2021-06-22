@@ -55,16 +55,6 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * Encrypts the password when saving.
-     *
-     * @param $password
-     */
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = Hash::make($password);
-    }
-
-    /**
      * @inheritDoc
      */
     public function getJWTCustomClaims()
@@ -82,5 +72,7 @@ class User extends Authenticatable implements JWTSubject
         parent::boot();
 
         static::created(fn(User $user) => UserCreatedEvent::dispatch($user));
+
+        static::creating(fn(User $user) => $user->password = Hash::make($user->password));
     }
 }

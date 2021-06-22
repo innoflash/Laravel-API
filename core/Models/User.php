@@ -3,12 +3,13 @@
 namespace Core\Models;
 
 use Database\Factories\UserFactory;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
+use App\Auth\Events\UserCreatedEvent;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -54,6 +55,16 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
+     * Encrypts the password when saving.
+     *
+     * @param $password
+     */
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = Hash::make($password);
+    }
+
+    /**
      * @inheritDoc
      */
     public function getJWTCustomClaims()
@@ -64,5 +75,12 @@ class User extends Authenticatable implements JWTSubject
     protected static function newFactory()
     {
         return new UserFactory();
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(fn(User $user) => UserCreatedEvent::dispatch($user));
     }
 }

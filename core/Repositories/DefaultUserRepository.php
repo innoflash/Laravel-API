@@ -2,9 +2,9 @@
 
 namespace Core\Repositories;
 
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
 use Core\Models\User;
+use Core\Abstracts\BaseRepository;
+use Prettus\Repository\Criteria\RequestCriteria;
 use Core\Contracts\Repositories\UserRepository as RepositoryInterface;
 
 /**

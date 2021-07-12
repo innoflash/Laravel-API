@@ -12,8 +12,10 @@ Route::post('login', LoginController::class)
 Route::post('register', UserCreateController::class)
      ->withoutMiddleware(['auth:api'])
      ->name('register');
-Route::post('forgot-password', ForgotPasswordController::class)
-     ->withoutMiddleware(['auth:api'])
-     ->name('forgot-password');
 Route::get('logout', LogoutController::class)
      ->name('logout');
+Route::get('forgot-password', function(){
+    dd(request('filter'));
+})
+     ->withoutMiddleware(['auth:api'])
+     ->name('forgot-password');

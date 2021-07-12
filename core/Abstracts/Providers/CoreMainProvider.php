@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Abstracts;
+namespace Core\Abstracts\Providers;
 
 use Core\Concerns\RegistersValidationRules;
 use Illuminate\Support\ServiceProvider;

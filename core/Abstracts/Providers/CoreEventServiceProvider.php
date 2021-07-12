@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Abstracts;
+namespace Core\Abstracts\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 

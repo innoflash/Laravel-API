@@ -3,7 +3,7 @@
 namespace Core\Repositories;
 
 use Core\Models\User;
-use Core\Abstracts\BaseRepository;
+use Core\Abstracts\Repositories\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Core\Contracts\Repositories\UserRepository as RepositoryInterface;
 

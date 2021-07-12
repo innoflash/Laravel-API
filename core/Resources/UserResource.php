@@ -2,7 +2,7 @@
 
 namespace Core\Resources;
 
-use Core\Abstracts\CoreResource;
+use Core\Abstracts\Resources\CoreResource;
 
 class UserResource extends CoreResource
 {

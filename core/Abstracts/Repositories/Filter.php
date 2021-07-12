@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Abstracts;
+namespace Core\Abstracts\Repositories;
 
 abstract class Filter
 {

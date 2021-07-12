@@ -2,9 +2,9 @@
 
 namespace App\{{module}}\Repositories;
 
-use Core\Abstracts\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
 use App\{{module}}\Models\{{model}};
+use Core\Abstracts\Repositories\BaseRepository;
+use Prettus\Repository\Criteria\RequestCriteria;
 use App\{{module}}\Contracts\Repositories\{{class}} as RepositoryInterface;
 
 /**

@@ -1,8 +1,7 @@
 <?php
 
-namespace Core\Abstracts;
+namespace Core\Abstracts\Repositories;
 
-use Core\Abstracts\Filter;
 use Core\Exceptions\NotAFilterException;
 use Prettus\Repository\Eloquent\BaseRepository as PrettusBaseRepository;
 

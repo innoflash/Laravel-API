@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Abstracts;
+namespace Core\Abstracts\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 

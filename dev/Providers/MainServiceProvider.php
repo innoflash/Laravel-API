@@ -2,7 +2,7 @@
 
 namespace Dev\Providers;
 
-use Core\Abstracts\CoreMainProvider;
+use Core\Abstracts\Providers\CoreMainProvider;
 use Dev\Console\Commands\InitModuleCommand;
 use Dev\Console\Commands\MakeCommandServiceCommand;
 use Dev\Console\Commands\MakeQueryServiceCommand;

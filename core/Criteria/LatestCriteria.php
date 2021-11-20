@@ -2,11 +2,11 @@
 
 namespace Core\Criteria;
 
-use Core\Contracts\CriteriaContract;
 use Illuminate\Database\Eloquent\Builder;
+use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
-class LatestCriteria implements CriteriaContract
+class LatestCriteria implements CriteriaInterface
 {
     /**
      * @var string
@@ -21,12 +21,12 @@ class LatestCriteria implements CriteriaContract
     /**
      * Sorts the models with latest first.
      *
-     * @param Builder             $model
+     * @param             $model
      * @param RepositoryInterface $repository
      *
      * @return Builder
      */
-    public function apply(Builder $model, RepositoryInterface $repository)
+    public function apply($model, RepositoryInterface $repository)
     {
         return $model->latest($this->column);
     }

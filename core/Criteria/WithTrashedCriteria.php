@@ -2,19 +2,18 @@
 
 namespace Core\Criteria;
 
-use Core\Contracts\CriteriaContract;
-use Illuminate\Database\Eloquent\Builder;
+use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
-class WithTrashedCriteria implements CriteriaContract
+class WithTrashedCriteria implements CriteriaInterface
 {
     /***
-     * @param Builder             $model
+     * @param $model
      * @param RepositoryInterface $response
      *
      * @return mixed
      */
-    public function apply(Builder $model, RepositoryInterface $response)
+    public function apply($model, RepositoryInterface $response)
     {
         return $model->withTrashed();
     }

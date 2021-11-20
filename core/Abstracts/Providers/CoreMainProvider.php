@@ -2,8 +2,8 @@
 
 namespace Core\Abstracts\Providers;
 
-use Core\Concerns\RegistersValidationRules;
 use Illuminate\Support\ServiceProvider;
+use Core\Concerns\RegistersValidationRules;
 
 abstract class CoreMainProvider extends ServiceProvider
 {
@@ -14,6 +14,8 @@ abstract class CoreMainProvider extends ServiceProvider
      * @var array
      */
     protected array $services = [];
+
+    protected array $bindingServices = [];
 
     /**
      * Module rules.
@@ -31,6 +33,18 @@ abstract class CoreMainProvider extends ServiceProvider
         $this->registerServices();
 
         $this->registerValidationRules();
+
+        $this->registerBindingServices();
+    }
+
+    /**
+     * Binds services to their implementations.
+     */
+    protected function registerBindingServices(): void
+    {
+        foreach ($this->bindingServices as $interface => $service) {
+            $this->app->singleton($interface, $service);
+        }
     }
 
     /**

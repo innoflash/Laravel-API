@@ -2,12 +2,12 @@
 
 namespace Core\Mappers;
 
-use Core\Abstracts\Mappers\Mapper;
-use Core\Exceptions\CoreInternalErrorException;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Core\Abstracts\Mappers\Mapper;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Support\Arrayable;
+use Core\Exceptions\CoreInternalErrorException;
 use Symfony\Component\HttpFoundation\File\File;
 
 class ModelMapper implements Mapper
@@ -17,13 +17,17 @@ class ModelMapper implements Mapper
     protected Collection $nullableFields;
     protected Collection $files;
     protected $beforeMap = false;
-    protected int $ministryId;
+    protected int $user_id;
     protected int $id;
 
-    public function __construct(array $data = [], int $ministryId = null)
+    public function __construct(array $data = [], int $userId = null)
     {
         if (isset($data['id'])) {
             $this->id = $data['id'];
+        }
+
+        if (isset($userId)) {
+            $this->user_id = $userId;
         }
         $this->nullableFields = new Collection();
         $this->data           = $this->clearCollection($this->parseData($data));
@@ -240,7 +244,6 @@ class ModelMapper implements Mapper
     private function makeModel(string $class, array $attributes = []): Model
     {
         $model = app($class);
-
         if (!$model instanceof Model) {
             throw new CoreInternalErrorException("Class {$class} must be an instance of " . Model::class);
         }
@@ -248,6 +251,10 @@ class ModelMapper implements Mapper
         if (is_callable($this->beforeMap)) {
             $attributes = ($this->beforeMap)($attributes);
         };
+
+        $fillablesCollection = collect($model->getFillable());
+
+        $attributes = Arr::where($attributes, fn($value, $key) => $fillablesCollection->contains($key));
 
         return $model->fill($attributes);
     }
@@ -416,11 +423,11 @@ class ModelMapper implements Mapper
                     });
 
                     if ($isExists === false) {
-                        $data->push(new Collection([$field => $alias, 'ministry_id' => $this->ministryId]));
+                        $data->push(new Collection([$field => $alias, 'user_id' => $this->user_id]));
                     }
                 }
             } else {
-                $data->push(new Collection(['ministry_id' => $this->ministryId]));
+                $data->push(new Collection(['user_id' => $this->user_id]));
             }
         }
 
@@ -449,5 +456,14 @@ class ModelMapper implements Mapper
         return new ModelMapper(
             Arr::get($this->all()->toArray(), $key, [])
         );
+    }
+
+    public function withUserId(int $userId): Mapper
+    {
+        $this->data = $this->data->merge([
+            'user_id' => $userId
+        ]);
+
+        return $this;
     }
 }

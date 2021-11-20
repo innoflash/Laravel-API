@@ -102,4 +102,12 @@ interface Mapper
      * @return Mapper
      */
     public function newFromSubset(string $key): Mapper;
+
+    /**
+     * Adds the user id to the mapping.
+     * @param int $userId
+     *
+     * @return Mapper
+     */
+    public function withUserId(int $userId): Mapper;
 }

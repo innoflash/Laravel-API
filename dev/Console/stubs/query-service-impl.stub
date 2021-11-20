@@ -11,18 +11,12 @@ use App\{{module}}\Contracts\Services\{{model}}QueryService as QueryServiceInter
  */
 class Default{{model}}QueryService implements QueryServiceInterface
 {
-    private {{model}}Repository ${{model_var}}Repository;
-
     /**
      * Default{{model}}Service constructor.
      *
      * @param {{model}}Repository ${{model_var}}Repository
      */
-    public function __construct(
-       {{model}}Repository ${{model_var}}Repository
-    ) {
-        $this->{{model_var}}Repository = ${{model_var}}Repository;
-    }
+    public function __construct(private {{model}}Repository ${{model_var}}Repository) {}
 
     /**
      * @param int $id

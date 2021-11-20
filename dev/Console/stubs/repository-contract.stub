@@ -2,7 +2,7 @@
 
 namespace App\{{module}}\Contracts\Repositories;
 
-use Prettus\Repository\Contracts\RepositoryInterface as BaseRepositoryInterface;
+use Core\Abstracts\Contracts\CoreBaseRepositoryInterface as BaseRepositoryInterface;
 
 /**
  * Interface {{class}}

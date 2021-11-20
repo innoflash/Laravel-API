@@ -11,17 +11,12 @@ use App\{{module}}\Contracts\Services\{{model}}CommandService as CommandServiceI
  */
 class Default{{model}}CommandService implements CommandServiceInterface
 {
-    private {{model}}Repository ${{model_var}}Repository;
-
     /**
      * Default{{model}}CommandService constructor.
      *
      * @param {{model}}Repository ${{model_var}}Repository
      */
-    public function __construct({{model}}Repository ${{model_var}}Repository)
-    {
-        $this->{{model_var}}Repository = ${{model_var}}Repository;
-    }
+    public function __construct(private {{model}}Repository ${{model_var}}Repository) { }
 
     /**
      * @param {{model}} ${{model_var}}

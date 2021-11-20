@@ -2,13 +2,13 @@
 
 namespace Core\Providers;
 
-use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\Str;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -42,7 +42,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             $this->mapModulesRoutes();
             Route::middleware('web')
-                 ->group(base_path('routes/web.php'));
+                ->group(base_path('routes/web.php'));
         });
     }
 
@@ -57,13 +57,14 @@ class RouteServiceProvider extends ServiceProvider
                     $kebabModuleName = $this->getModuleKebab($module);
 
                     Route::name($kebabModuleName . '.')
-                         ->prefix('api/' . $kebabModuleName)
-                         ->middleware(['api', 'auth:api']) //TODO add a global middleware.
-                         ->group($routeFile->getPathname());
+                        ->prefix('api/' . $kebabModuleName)
+                        ->middleware(['api', 'auth:api']) //TODO add a global middleware.
+                        ->group($routeFile->getPathname());
                 }
             }
         }
     }
+
     /**
      * Configure the rate limiters for the application.
      *
@@ -86,7 +87,7 @@ class RouteServiceProvider extends ServiceProvider
     private function getModuleKebab(string $module): string
     {
         return Str::of($module)
-                  ->afterLast('/')
-                  ->kebab();
+            ->afterLast(DIRECTORY_SEPARATOR)
+            ->kebab();
     }
 }
